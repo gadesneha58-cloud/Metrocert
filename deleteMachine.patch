@@ -1,0 +1,13 @@
+--- app/src/main/java/com/example/MetroCertViewModel.kt
++++ app/src/main/java/com/example/MetroCertViewModel.kt
+@@ -100,2 +100,10 @@
+     }
++
++    fun deleteMachine(index: Int) {
++        if (_activeReports.value.size > 1 && index in _activeReports.value.indices) {
++            _activeReports.update { it.filterIndexed { i, _ -> i != index } }
++            if (_currentIndex.value >= _activeReports.value.size) {
++                _currentIndex.value = _activeReports.value.size - 1
++            }
++        }
++    }

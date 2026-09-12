@@ -1,0 +1,1 @@
+sed -i 's/val finalReport = report.copy(status = overallStatus)/val finalReport = report.copy(status = overallStatus, date = System.currentTimeMillis())\n            _currentReport.value = finalReport/g' app/src/main/java/com/example/MetroCertViewModel.kt

@@ -1,0 +1,30 @@
+--- app/src/main/java/com/example/util/PdfGenerator.kt
++++ app/src/main/java/com/example/util/PdfGenerator.kt
+@@ -87,6 +87,27 @@
+             currentY += 20f
+         }
+ 
++        if (report.repeatabilityResult != null) {
++            currentY += 20f
++            canvas.drawText("Repeatability Test (Load: ${String.format("%.2f", report.repeatabilityResult!!.referenceWeight)})", startX, currentY, headerPaint)
++            currentY += 20f
++            canvas.drawText("Range: ${String.format("%.2f", report.repeatabilityResult!!.range)}", startX, currentY, bodyPaint)
++            canvas.drawText("MPE: ±${String.format("%.2f", report.repeatabilityResult!!.mpe)}", startX + 150f, currentY, bodyPaint)
++            val rPass = report.repeatabilityResult!!.isPass
++            canvas.drawText(if (rPass) "PASS" else "FAIL", startX + 300f, currentY, if (rPass) passPaint else failPaint)
++        }
++
++        if (report.eccentricityResult != null) {
++            currentY += 30f
++            canvas.drawText("Eccentricity Test (Load: ${String.format("%.2f", report.eccentricityResult!!.referenceWeight)})", startX, currentY, headerPaint)
++            currentY += 20f
++            report.eccentricityResult!!.positions.forEach { pos ->
++                canvas.drawText("${pos.positionName}: Err ${String.format("%.2f", pos.error)}", startX, currentY, bodyPaint)
++                val ePass = pos.isPass
++                canvas.drawText(if (ePass) "PASS" else "FAIL", startX + 200f, currentY, if (ePass) passPaint else failPaint)
++                currentY += 20f
++            }
++        }
++
+         currentY += 20f
+         canvas.drawLine(startX, currentY, pageWidth - startX, currentY, linePaint)

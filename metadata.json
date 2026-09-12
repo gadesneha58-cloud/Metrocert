@@ -1,0 +1,6 @@
+{
+  "name": "MetroCert",
+  "description": "MetroCert OIML R-76 Generator for Non-Automatic Weighing Instruments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
